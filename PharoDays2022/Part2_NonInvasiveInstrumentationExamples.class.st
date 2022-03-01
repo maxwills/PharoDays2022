@@ -62,3 +62,17 @@ Part2_NonInvasiveInstrumentationExamples class >> installLoggingMetalinkInMethod
 	metalink control: #before.
 	aCompiledMethod ast link: metalink
 ]
+
+{ #category : #'as yet unclassified' }
+Part2_NonInvasiveInstrumentationExamples class >> uninstallAllLinks [
+
+	<script>
+	MetaLink uninstallAll
+]
+
+{ #category : #'as yet unclassified' }
+Part2_NonInvasiveInstrumentationExamples class >> uninstallAllMethodProxies [
+
+	<script>
+	MpMethodProxy allInstances copy do: [ :mp | mp uninstall ]
+]

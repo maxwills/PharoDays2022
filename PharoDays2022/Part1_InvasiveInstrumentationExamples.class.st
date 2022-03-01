@@ -16,9 +16,9 @@ Part1_InvasiveInstrumentationExamples class >> appleHunt [
 	winner := huntEvent calculateRanks first.
 	^ winner
 	
-"Q1. How many time OrderedCollection>>#add: is called? (with apples?)"
-"Q2. How many time OrderedCollection>>#add: is called? (with apples?)"
-"Q3. How many time OrderedCollection>>#add: is called? (with apples?)"
+"Q1. How many times OrderedCollection>>#add: is called? (with apples?)"
+"Q2. How many times any method with selector add: is called? (which method?)"
+"Q3. How many times OrderedCollection>>#add: is called? (with apples?)"
 ]
 
 { #category : #adding }
@@ -56,9 +56,7 @@ Part1_InvasiveInstrumentationExamples class >> ex3_OrderedCollectionAddWithCondi
 Part1_InvasiveInstrumentationExamples class >> ex4_showImplementorsOfAdd [
 
 	<script>
-	| implementorsOfAdd |
-	implementorsOfAdd := InstrumentationUtils implementorsOf: #add:.
-	
+	self systemNavigation browseAllImplementorsOf: #add:
 ]
 
 { #category : #'as yet unclassified' }

@@ -68,10 +68,3 @@ InstrumentationUtils class >> installLoggingMetalinkInMethod: aCompiledMethod [
 	metalink control: #before.
 	aCompiledMethod ast link: metalink
 ]
-
-{ #category : #'as yet unclassified' }
-InstrumentationUtils class >> uninstallAllLinks [
-
-	<script>
-	MetaLink uninstallAll
-]
