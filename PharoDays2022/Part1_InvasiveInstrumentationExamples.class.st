@@ -29,7 +29,7 @@ Part1_InvasiveInstrumentationExamples class >> browseOrderedCollectionAdd [
 ]
 
 { #category : #adding }
-Part1_InvasiveInstrumentationExamples class >> ex01_OrderedCollectionAddLogging: newObject [
+Part1_InvasiveInstrumentationExamples class >> ex1_OrderedCollectionAddLogging: newObject [
 
 	MyLoggerUtil log: 'OrderedCollection >> add: called'.
 
@@ -37,7 +37,7 @@ Part1_InvasiveInstrumentationExamples class >> ex01_OrderedCollectionAddLogging:
 ]
 
 { #category : #adding }
-Part1_InvasiveInstrumentationExamples class >> ex02_OrderedCollectionAddWithConditionalHalting: newObject [
+Part1_InvasiveInstrumentationExamples class >> ex2_OrderedCollectionAddWithConditionalHalting: newObject [
 
 	newObject class = Apple ifTrue: [ self halt ].
 
@@ -45,7 +45,7 @@ Part1_InvasiveInstrumentationExamples class >> ex02_OrderedCollectionAddWithCond
 ]
 
 { #category : #adding }
-Part1_InvasiveInstrumentationExamples class >> ex03_OrderedCollectionAddWithConditionalLogging: newObject [
+Part1_InvasiveInstrumentationExamples class >> ex3_OrderedCollectionAddWithConditionalLogging: newObject [
 
 	newObject class = Apple ifTrue: [ MyLoggerUtil log: 'OrderedCollection >> add: called' ].
 
@@ -53,10 +53,12 @@ Part1_InvasiveInstrumentationExamples class >> ex03_OrderedCollectionAddWithCond
 ]
 
 { #category : #adding }
-Part1_InvasiveInstrumentationExamples class >> ex04_showImplementorsOfAdd [
+Part1_InvasiveInstrumentationExamples class >> ex4_showImplementorsOfAdd [
 
 	<script>
-	self systemNavigation browseAllImplementorsOf: #add:
+	| implementorsOfAdd |
+	implementorsOfAdd := InstrumentationUtils implementorsOf: #add:.
+	
 ]
 
 { #category : #'as yet unclassified' }
