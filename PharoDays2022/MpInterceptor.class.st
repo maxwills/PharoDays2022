@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'interceptorBlock'
 	],
-	#category : #PharoDays2022
+	#category : #'PharoDays2022-Utils'
 }
 
 { #category : #evaluating }

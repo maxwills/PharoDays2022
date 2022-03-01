@@ -2,90 +2,54 @@ Class {
 	#name : #MyLoggerUtil,
 	#superclass : #Object,
 	#classInstVars : [
-		'loggedMessages',
+		'counter',
 		'enabled'
 	],
-	#category : #PharoDays2022
+	#category : #'PharoDays2022-Utils'
 }
 
 { #category : #logging }
 MyLoggerUtil class >> clear [
 
+	<script>
 	enabled ifFalse: [ ^ self ].
 	[ 
 	UIManager default defer: [ 
 		Transcript clear.
-		loggedMessages removeAll ] ] fork
-]
-
-{ #category : #'as yet unclassified' }
-MyLoggerUtil class >> findArgumentsOfContextWithSelector: aSelector [
-
-	| context found arguments |
-	context := thisContext.
-	arguments := nil.
-	found := false.
-	[ found not and: [ context isNotNil ] ] whileTrue: [ 
-		context isBlockContext ifFalse: [ 
-			context method selector = aSelector ifTrue: [ 
-				found := true.
-				arguments := context arguments ] ].
-		context := context sender ].
-	^ arguments
-]
-
-{ #category : #'as yet unclassified' }
-MyLoggerUtil class >> findContextWithSelector: aSelector [
-
-	| context found |
-	context := thisContext.
-	found := false.
-	[ found not and: [ context isNotNil ] ] whileTrue: [ 
-		context isBlockContext ifFalse: [ context method selector = aSelector ifTrue: [ found := true ] ].
-		found ifFalse: [ context := context sender ] ].
-	^ context
-]
-
-{ #category : #'as yet unclassified' }
-MyLoggerUtil class >> getStringOfContextMethodFor: aContext andSenders: aNumber [
-
-	aContext ifNil: [ ^ '' ].
-	aNumber <= 0 ifTrue: [ ^ '' ].
-	^   (self 
-		  getStringOfContextMethodFor: aContext sender
-		  andSenders: aNumber - 1), ' / ' , aContext method methodClass name , '>>#' , aContext method selector
+		counter := 0 ] ] fork
 ]
 
 { #category : #initialization }
 MyLoggerUtil class >> initialize [
 
-	loggedMessages := OrderedCollection new.
-	enabled := true.
+	counter := 0.
+	enabled := true
 ]
 
 { #category : #logging }
 MyLoggerUtil class >> log: aString [
-	enabled ifFalse: [ ^self ].
+
+	enabled ifFalse: [ ^ self ].
 	[ 
-	UIManager default defer: [ 
-		loggedMessages add: aString.
+	UIManager default defer: [ "loggedMessages add: aString."
 		(Transcript containingWindow isNil or: [ Transcript containingWindow isDisplayed not ]) ifTrue: [ 
 			Transcript open ].
+		counter := counter + 1.
 		Transcript
-			show: aString;
+			show: counter asString , '. ' , aString;
 			cr ] ] fork
 ]
 
 { #category : #'as yet unclassified' }
 MyLoggerUtil class >> logTop3CallsInStack [
 
-	self log: (self getStringOfContextMethodFor: thisContext sender andSenders: 3)
+	self log: (MyReflectionUtils getStringOfContextMethodFor: thisContext sender andSenders: 3)
 ]
 
 { #category : #'as yet unclassified' }
 MyLoggerUtil class >> logTopNCallsInStack: aNumber [
 
-	self log: (self getStringOfContextMethodFor: thisContext sender andSenders: aNumber)
+	self log: (MyReflectionUtils getStringOfContextMethodFor: thisContext sender andSenders: aNumber)
 ]
 
 { #category : #'as yet unclassified' }

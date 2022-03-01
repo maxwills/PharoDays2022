@@ -29,14 +29,18 @@ AppleHunt >> calculateRanks [
 ]
 
 { #category : #'as yet unclassified' }
-AppleHunt >> doHuntingStage: stageNumber [
+AppleHunt >> doHuntingDay: stageNumber [
+
+	"performs a hunting stage"
 
 	| maxApples |
 	maxApples := 10 * stageNumber.
 
 	hunters valuesDo: [ :hunter | 
 		| huntedApples |
+		"get a random number of apples"
 		huntedApples := random nextIntegerBetween: 1 and: maxApples.
+		"add the apples in random bags of the hunter"
 		huntedApples timesRepeat: [ hunter storeAnAppleInRandomBag: random ] ]
 ]
 
@@ -54,10 +58,11 @@ AppleHunt >> giveHuntersSomeBags [
 { #category : #'as yet unclassified' }
 AppleHunt >> goHunting [
 
+	"performs sequentially every stage of the hunt"
+
 	| nTimes |
-	nTimes := 4. 
-	1 to: nTimes do: [ :i | 
-		self doHuntingStage: i]
+	nTimes := 4.
+	1 to: nTimes do: [ :i | self doHuntingDay: i ]
 ]
 
 { #category : #accessing }
@@ -76,10 +81,11 @@ AppleHunt >> hunters: anObject [
 AppleHunt >> initialize [
 
 	random := self newRandom.
-	hunters := { 
-		           (#Alice -> AppleHunter newAlice).
-		           (#Bob -> AppleHunter newBob).
-		           (#Charlie -> AppleHunter newCharlie) } asDictionary
+	hunters := Dictionary new
+		           add: #Alice -> AppleHunter newAlice;
+		           add: #Bob -> AppleHunter newBob;
+		           add: #Charlie -> AppleHunter newCharlie;
+		           yourself
 ]
 
 { #category : #initialization }
