@@ -58,6 +58,40 @@ InstrumentationUtils class >> doLoggingOfAddedApplesAndDay [
 			, day asString ]
 ]
 
+{ #category : #'as yet unclassified' }
+InstrumentationUtils class >> doLoggingOfAddedApplesAndDayFromContext: startingContext [
+
+	"Find the context of the add: method activation along with other conditions on the execution"
+
+	"Can only be used form inside or outside the execution, since the startingContext for the search must be specified"
+
+	| addContext doHuntingDayBlockContext doHuntingDayMethodContext newObject hunter day |
+	addContext := MyReflectionUtils findContextWithSelector: #add: startingAt: startingContext.
+	addContext ifNil: [ ^ self ].
+
+	doHuntingDayBlockContext := MyReflectionUtils
+		                            findContextSatisfying: [ :ctx | 
+			                            ctx isBlockContext and: [ 
+				                            ctx methodSelector = #doHuntingDay: and: [ 
+					                            ctx sender methodSelector = #valuesDo: ] ] ]
+		                            startingAt: addContext.
+	doHuntingDayBlockContext ifNil: [ ^ self ].
+	doHuntingDayMethodContext := MyReflectionUtils findContextSatisfying: [ :ctx | 
+		                             ctx isBlockContext not and: [ ctx methodSelector = #doHuntingDay: ] ]
+		                             startingAt: doHuntingDayBlockContext sender.
+	doHuntingDayMethodContext ifNil: [ ^ self ].
+
+	hunter := doHuntingDayBlockContext arguments first.
+	day := doHuntingDayMethodContext arguments first.
+	"new object will be the argument of the add: method"
+	newObject := addContext arguments first.
+	newObject isAssociation ifTrue: [ newObject := newObject value ].
+	newObject class = Apple ifTrue: [ 
+		MyLoggerUtil log:
+			addContext receiver class name , ' >> add: called. Hunter: ' , hunter name , ' day: '
+			, day asString ]
+]
+
 { #category : #'instance creation' }
 InstrumentationUtils class >> implementorsOf: selector [
 

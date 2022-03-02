@@ -5,7 +5,7 @@ Class {
 		'hunters',
 		'random'
 	],
-	#category : #PharoDays2022
+	#category : #'PharoDays2022-Story'
 }
 
 { #category : #'as yet unclassified' }
@@ -16,7 +16,8 @@ AppleHunt class >> letItBegin [
 	a giveHuntersSomeBags.
 	a goHunting.
 	winner := a calculateRanks first.
-	winner biggestBagSize
+	winner biggestBagSize.
+	^ winner
 ]
 
 { #category : #'as yet unclassified' }

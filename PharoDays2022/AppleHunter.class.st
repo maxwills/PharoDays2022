@@ -5,7 +5,7 @@ Class {
 		'name',
 		'bags'
 	],
-	#category : #PharoDays2022
+	#category : #'PharoDays2022-Story'
 }
 
 { #category : #'instance creation' }

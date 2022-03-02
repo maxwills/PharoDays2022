@@ -1,11 +1,11 @@
 Class {
 	#name : #AppleHuntTest,
 	#superclass : #TestCase,
-	#category : #PharoDays2022
+	#category : #'PharoDays2022-Tests'
 }
 
 { #category : #tests }
 AppleHuntTest >> testHunting [
 
-	AppleHunt letItBegin
+	self assert: AppleHunt letItBegin name equals: #Charlie
 ]

@@ -5,7 +5,7 @@ Class {
 		'healthy',
 		'id'
 	],
-	#category : #PharoDays2022
+	#category : #'PharoDays2022-Story'
 }
 
 { #category : #comparing }
