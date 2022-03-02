@@ -10,8 +10,7 @@ InstrumentationUtils class >> doLoggingOfAddedApples [
 	"Find the context of the add: method activation"
 
 	| ourClasses |
-	ourClasses := { 
-		              Apple.
+	ourClasses := {  Apple.
 		              AppleHunter.
 		              AppleHunt }.
 	(MyReflectionUtils findContextWithSelector: #add:) ifNotNil: [ :ctx | 

@@ -1,11 +1,18 @@
 Class {
-	#name : #'Part1_InvasiveInstrumentationExamples',
+	#name : #'Part1_CodeInsertionExamples',
 	#superclass : #Object,
 	#category : #'PharoDays2022-GuidedExamples'
 }
 
+{ #category : #initialization }
+Part1_CodeInsertionExamples class >> _clearLogger [
+
+	<script>
+	MyLoggerUtil clear
+]
+
 { #category : #'as yet unclassified' }
-Part1_InvasiveInstrumentationExamples class >> appleHunt [
+Part1_CodeInsertionExamples class >> appleHunt [
 
 	"This is the execution we must explore"
 
@@ -22,14 +29,14 @@ Part1_InvasiveInstrumentationExamples class >> appleHunt [
 ]
 
 { #category : #adding }
-Part1_InvasiveInstrumentationExamples class >> browseOrderedCollectionAdd [
+Part1_CodeInsertionExamples class >> browseOrderedCollectionAdd [
 
 	<script>
 	(OrderedCollection >> #add:) browse
 ]
 
 { #category : #adding }
-Part1_InvasiveInstrumentationExamples class >> ex1_OrderedCollectionAddLogging: newObject [
+Part1_CodeInsertionExamples class >> ex1_OrderedCollectionAddLogging: newObject [
 
 	MyLoggerUtil log: 'OrderedCollection >> add: called'.
 
@@ -37,7 +44,7 @@ Part1_InvasiveInstrumentationExamples class >> ex1_OrderedCollectionAddLogging: 
 ]
 
 { #category : #adding }
-Part1_InvasiveInstrumentationExamples class >> ex2_OrderedCollectionAddWithConditionalHalting: newObject [
+Part1_CodeInsertionExamples class >> ex2_OrderedCollectionAddWithConditionalHalting: newObject [
 
 	newObject class = Apple ifTrue: [ self halt ].
 
@@ -45,7 +52,7 @@ Part1_InvasiveInstrumentationExamples class >> ex2_OrderedCollectionAddWithCondi
 ]
 
 { #category : #adding }
-Part1_InvasiveInstrumentationExamples class >> ex3_OrderedCollectionAddWithConditionalLogging: newObject [
+Part1_CodeInsertionExamples class >> ex3_OrderedCollectionAddWithConditionalLogging: newObject [
 
 	newObject class = Apple ifTrue: [ MyLoggerUtil log: 'OrderedCollection >> add: called' ].
 
@@ -53,14 +60,14 @@ Part1_InvasiveInstrumentationExamples class >> ex3_OrderedCollectionAddWithCondi
 ]
 
 { #category : #adding }
-Part1_InvasiveInstrumentationExamples class >> ex4_showImplementorsOfAdd [
+Part1_CodeInsertionExamples class >> ex4_showImplementorsOfAdd [
 
 	<script>
 	self systemNavigation browseAllImplementorsOf: #add:
 ]
 
 { #category : #'as yet unclassified' }
-Part1_InvasiveInstrumentationExamples class >> openPlaygroundWithAppleHunt [
+Part1_CodeInsertionExamples class >> openPlaygroundWithAppleHunt [
 
 	<script>
 	| code removeSubstrings |
@@ -73,7 +80,7 @@ Part1_InvasiveInstrumentationExamples class >> openPlaygroundWithAppleHunt [
 ]
 
 { #category : #adding }
-Part1_InvasiveInstrumentationExamples class >> restoreOrderedCollectionAdd [
+Part1_CodeInsertionExamples class >> restoreOrderedCollectionAdd [
 	"Programmatically recompiles the original code of OrderedCollection>>add:"
 	"Click the script icon in the method list to restore the method OrderedCollection>>add:"
 	<script>
