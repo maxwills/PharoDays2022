@@ -9,11 +9,14 @@ InstrumentationUtils class >> doLoggingOfAddedApples [
 
 	"Find the context of the add: method activation"
 
+	"Can only be used form inside the execution (via code insertion or instrumentation)"
+
 	| ourClasses |
-	ourClasses := {  Apple.
+	ourClasses := { 
+		              Apple.
 		              AppleHunter.
 		              AppleHunt }.
-	(MyReflectionUtils findContextWithSelector: #add:) ifNotNil: [ :ctx | 
+	(MyReflectionUtils findContextWithSelector: #add: startingAt: thisContext) ifNotNil: [ :ctx | 
 		| newObject |
 		newObject := ctx arguments first.
 		newObject isAssociation ifTrue: [ newObject := newObject value ].
@@ -22,24 +25,37 @@ InstrumentationUtils class >> doLoggingOfAddedApples [
 ]
 
 { #category : #'as yet unclassified' }
-InstrumentationUtils class >> ex1_installLoggingMetalinkInCollectionAdd [
+InstrumentationUtils class >> doLoggingOfAddedApplesAndDay [
 
-	<script>
-	| metalink |
-	metalink := MetaLink new.
-	metalink selector: #doLoggingOfAddedApples.
-	metalink metaObject: self.
-	metalink control: #after.
-	(SortedCollection >> #add:) ast link: metalink
-]
+	"Find the context of the add: method activation along with other conditions on the execution"
 
-{ #category : #'as yet unclassified' }
-InstrumentationUtils class >> ex2_installLoggingMetalinkInEveryMethodAdd [
+	"Can only be used form inside the execution (via code insertion or instrumentation)"
 
-	<script>
-	| implementorsOfAdd |
-	implementorsOfAdd := self implementorsOf: #add:.
-	implementorsOfAdd do: [ :cls | self installLoggingMetalinkInMethod: cls >> #add: ]
+	| addContext doHuntingDayBlockContext doHuntingDayMethodContext newObject hunter day |
+	addContext := MyReflectionUtils findContextWithSelector: #add: startingAt: thisContext.
+	addContext ifNil: [ ^ self ].
+
+	doHuntingDayBlockContext := MyReflectionUtils
+		                            findContextSatisfying: [ :ctx | 
+			                            ctx isBlockContext and: [ 
+				                            ctx methodSelector = #doHuntingDay: and: [ 
+					                            ctx sender methodSelector = #valuesDo: ] ] ]
+		                            startingAt: addContext.
+	doHuntingDayBlockContext ifNil: [ ^ self ].
+	doHuntingDayMethodContext := MyReflectionUtils findContextSatisfying: [ :ctx | 
+		                             ctx isBlockContext not and: [ ctx methodSelector = #doHuntingDay: ] ]
+		                             startingAt: doHuntingDayBlockContext sender.
+
+
+	hunter := doHuntingDayBlockContext arguments first.
+	day := doHuntingDayMethodContext arguments first.
+	"new object will be the argument of the add: method"
+	newObject := addContext arguments first.
+	newObject isAssociation ifTrue: [ newObject := newObject value ].
+	newObject class = Apple ifTrue: [ 
+		MyLoggerUtil log:
+			addContext receiver class name , ' >> add: called. Hunter: ' , hunter name , ' day: '
+			, day asString ]
 ]
 
 { #category : #'instance creation' }
@@ -54,6 +70,18 @@ InstrumentationUtils class >> implementorsOf: selector [
 		(m selector = #add: and: [ m isInstalled ]) ifTrue: [ implementors add: m methodClass ] ].
 
 	^ implementors
+]
+
+{ #category : #'as yet unclassified' }
+InstrumentationUtils class >> installExtendedLoggingMetalinkInMethod: aCompiledMethod [
+
+	<script>
+	| metalink |
+	metalink := MetaLink new.
+	metalink selector: #doLoggingOfAddedApplesAndDay.
+	metalink metaObject: self.
+	metalink control: #before.
+	aCompiledMethod ast link: metalink
 ]
 
 { #category : #'as yet unclassified' }

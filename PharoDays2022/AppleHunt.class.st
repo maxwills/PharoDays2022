@@ -29,12 +29,12 @@ AppleHunt >> calculateRanks [
 ]
 
 { #category : #'as yet unclassified' }
-AppleHunt >> doHuntingDay: stageNumber [
+AppleHunt >> doHuntingDay: dayNumber [
 
 	"performs a hunting stage"
 
 	| maxApples |
-	maxApples := 10 * stageNumber.
+	maxApples := 10 * dayNumber.
 
 	hunters valuesDo: [ :hunter | 
 		| huntedApples |

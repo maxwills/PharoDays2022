@@ -5,10 +5,10 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MyReflectionUtils class >> findArgumentsOfContextWithSelector: aSelector [
+MyReflectionUtils class >> findArgumentsOfContextWithSelector: aSelector startingAt: startingContext [
 
 	| context found arguments |
-	context := thisContext.
+	context := startingContext.
 	arguments := nil.
 	found := false.
 	[ found not and: [ context isNotNil ] ] whileTrue: [ 
@@ -21,15 +21,28 @@ MyReflectionUtils class >> findArgumentsOfContextWithSelector: aSelector [
 ]
 
 { #category : #'as yet unclassified' }
-MyReflectionUtils class >> findContextWithSelector: aSelector [
+MyReflectionUtils class >> findContextSatisfying: aBlock startingAt: context [
 
-	| context found |
-	context := thisContext.
+	| iterationContext found |
+	iterationContext := context.
 	found := false.
-	[ found not and: [ context isNotNil ] ] whileTrue: [ 
-		context isBlockContext ifFalse: [ context method selector = aSelector ifTrue: [ found := true ] ].
-		found ifFalse: [ context := context sender ] ].
-	^ context
+	[ found not and: [ iterationContext isNotNil ] ] whileTrue: [ 
+		found := aBlock value: iterationContext.
+		found ifFalse: [ iterationContext := iterationContext sender ] ].
+	^ iterationContext
+]
+
+{ #category : #'as yet unclassified' }
+MyReflectionUtils class >> findContextWithSelector: aSelector startingAt: context [
+
+	| iterationContext found |
+	iterationContext := context.
+	found := false.
+	[ found not and: [ iterationContext isNotNil ] ] whileTrue: [ 
+		iterationContext isBlockContext ifFalse: [ 
+			iterationContext method selector = aSelector ifTrue: [ found := true ] ].
+		found ifFalse: [ iterationContext := iterationContext sender ] ].
+	^ iterationContext
 ]
 
 { #category : #'as yet unclassified' }

@@ -34,7 +34,8 @@ Part2_InstrumentationExamples class >> ex2_installLoggingMetalinkInEveryMethodAd
 	<script>
 	| implementorsOfAdd |
 	implementorsOfAdd := InstrumentationUtils implementorsOf: #add:.
-	implementorsOfAdd do: [ :cls | InstrumentationUtils installLoggingMetalinkInMethod: cls >> #add: ]
+	implementorsOfAdd do: [ :cls | 
+		InstrumentationUtils installLoggingMetalinkInMethod: cls >> #add: ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -67,6 +68,17 @@ Part2_InstrumentationExamples class >> ex4_installLoggingWithMethodProxiesInAllA
 			newObject isAssociation ifTrue: [ newObject := newObject value ].
 			(ourClasses includes: newObject class) ifTrue: [ 
 				MyLoggerUtil log: cls name , ' >> add: called from instrumentation (MethodProxy)' ] ] ]
+]
+
+{ #category : #'as yet unclassified' }
+Part2_InstrumentationExamples class >> ex5_installLoggingAndMoreReflection [
+
+	"Same as example 2, but calls a different logging method"
+
+	<script>
+	| implementorsOfAdd |
+	implementorsOfAdd := InstrumentationUtils implementorsOf: #add:.
+	implementorsOfAdd do: [ :cls | InstrumentationUtils installExtendedLoggingMetalinkInMethod: cls >> #add: ]
 ]
 
 { #category : #'as yet unclassified' }
