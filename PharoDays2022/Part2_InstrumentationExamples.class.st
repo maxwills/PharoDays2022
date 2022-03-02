@@ -12,6 +12,13 @@ Part2_InstrumentationExamples class >> _clearLogger [
 ]
 
 { #category : #'as yet unclassified' }
+Part2_InstrumentationExamples class >> _openPlaygroundWithAppleHunt [
+
+	<script>
+	Part1_CodeInsertionExamples _openPlaygroundWithAppleHunt
+]
+
+{ #category : #'as yet unclassified' }
 Part2_InstrumentationExamples class >> ex1_installLoggingMetalinkInCollectionAdd [
 
 	"The metalink will execute the method 

@@ -12,17 +12,24 @@ Part3_SindarinExamples class >> _clearLogger [
 ]
 
 { #category : #'as yet unclassified' }
-Part3_SindarinExamples class >> disableSindarinUI [
+Part3_SindarinExamples class >> _disableSindarinUI [
 
 	<script>
 	StSindarinDebuggerScriptingPresenter showInDebugger: false
 ]
 
 { #category : #'as yet unclassified' }
-Part3_SindarinExamples class >> enableSindarinUI [
+Part3_SindarinExamples class >> _enableSindarinUI [
 
 	<script>
 	StSindarinDebuggerScriptingPresenter showInDebugger: true
+]
+
+{ #category : #'as yet unclassified' }
+Part3_SindarinExamples class >> _openPlaygroundWithAppleHunt [
+
+	<script>
+	Part1_CodeInsertionExamples _openPlaygroundWithAppleHunt
 ]
 
 { #category : #'as yet unclassified' }
