@@ -39,8 +39,8 @@ Part4_SeekerExamples class >> ex1_seekerScriptingConditionalStop [
 "stops at the first #add: call"
 	| seeker currentState |
 	"Copy from here"
-	seeker doAndUpdateSessionAfter: [ 
-		seeker restartAtBytecodeOne.
+	seeker restartAtBytecodeOne.
+seeker doAndUpdateSessionAfter: [ 
 		[ seeker canStep ] whileTrue: [ 
 			seeker step.
 			(currentState isMessageSend and: [ currentState node selector = #add: ]) ifTrue: [ ^ self ] ] ]
