@@ -54,3 +54,14 @@ MyReflectionUtils class >> getStringOfContextMethodFor: aContext andSenders: aNu
 		  getStringOfContextMethodFor: aContext sender
 		  andSenders: aNumber - 1), ' / ' , aContext method methodClass name , '>>#' , aContext method selector
 ]
+
+{ #category : #initialization }
+MyReflectionUtils class >> resetKeyshortcuts [
+
+	"Nothing to do with reflectio, but I didnt want to create a class just for this method"
+
+	"Resets the KeyMappings, so the new shortcuts are activated"
+
+	<script>
+	KMRepository reset
+]

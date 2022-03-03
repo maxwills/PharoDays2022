@@ -20,5 +20,6 @@ BaselineOfPharoDays2022 >> postload: loader package: packageSpec [
 		baseline: 'Seeker';
 		repository: 'github://maxwills/SeekerDebugger:main';
 		load.
-		(self class environment at: #SeekerInstallHelpers) uninstall
+	(self class environment at: #SeekerInstallHelpers) uninstall.
+	KMRepository reset
 ]
