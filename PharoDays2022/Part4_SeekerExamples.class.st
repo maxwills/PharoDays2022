@@ -111,7 +111,6 @@ Part4_SeekerExamples class >> ex5_seekerTTQ: seeker [
 Part4_SeekerExamples ex5_seekerTTQ: seeker
 
 "
-
 	| autoResultType |
 	autoResultType := AutoType new.
 
@@ -122,5 +121,6 @@ Part4_SeekerExamples ex5_seekerTTQ: seeker
 				 bytecodeIndex: state bytecodeIndex;
 				 methodClass: state methodAboutToExecute methodClass name;
 				 messageSelector: state methodAboutToExecute selector;
+				 newColumnASD: 123;
 				 endWith ]) showInSeeker
 ]

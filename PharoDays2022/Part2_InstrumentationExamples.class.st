@@ -71,7 +71,7 @@ Part2_InstrumentationExamples class >> ex2_installLoggingMetalinkInEveryMethodAd
 		|metalink|
 		metalink := MetaLink new.
 		metalink selector: #doLoggingOfAddedApples.
-		metalink metaObject: self.
+		metalink metaObject: InstrumentationUtils.
 		metalink control: #before.
 		(cls >> #add:) ast link: metalink ]
 ]

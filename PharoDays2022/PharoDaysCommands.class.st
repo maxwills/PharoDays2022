@@ -7,7 +7,7 @@ Class {
 { #category : #menu }
 PharoDaysCommands class >> menu00BrowseAnecdote: aBuilder [
 
-	<worldMenu>
+	"<worldMenu>"
 	(aBuilder item: #PharoDaysBrowseAnectodeItem)
 		parent: #PharoDaysItem;
 		action: [ Anecdotes class browse ];
