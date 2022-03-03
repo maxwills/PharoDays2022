@@ -7,7 +7,7 @@ Class {
 { #category : #adding }
 Part1_CodeInsertionExamples class >> _browseOrderedCollectionAdd [
 
-	<script>
+	<script> 
 	(OrderedCollection >> #add:) browse
 ]
 
@@ -71,7 +71,6 @@ Part1_CodeInsertionExamples class >> appleHunt [
 	
 "Q1. How many times OrderedCollection>>#add: is called? (with apples?)"
 "Q2. How many times any method with selector add: is called? (which method?)"
-"Q3. How many apples are placed in the bags of the hunters during each day of the hunt?"
 ]
 
 { #category : #adding }
