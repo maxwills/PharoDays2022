@@ -6,8 +6,8 @@ ToolShortcutsCategory >> openIdea [
 	<shortcut>
 	^ KMKeymap shortcut: $o meta shift action: [ 
 		  [ 
-		  (ZnEasy getPng:
-			   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuNv3dvGPImlklD8KKxv0qe5WvyDn1JfCl5OD6lrx3zxFFbzFMGpbjSfR5RQHvf4sSOJ0&usqp=CAU')
+		  (ZnEasy getJpeg:
+			   'https://i.imgflip.com/67be6k.jpg')
 			  asMorph openInWindow ] onErrorDo: [ :e | e resumeUnchecked: e ] ]
 ]
 
