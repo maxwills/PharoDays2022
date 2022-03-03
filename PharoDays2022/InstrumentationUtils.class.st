@@ -95,6 +95,20 @@ InstrumentationUtils class >> doLoggingOfAddedApplesAndDayFromContext: startingC
 			, day asString ]
 ]
 
+{ #category : #'as yet unclassified' }
+InstrumentationUtils class >> doLoggingOfAddedApplesSimple [
+
+	"Find the context of the add: method activation"
+
+	"Can only be used form inside the execution (via code insertion or instrumentation)"
+
+	(MyReflectionUtils findContextWithSelector: #add: startingAt: thisContext) ifNotNil: [ :ctx | 
+		| newObject |
+		newObject := ctx arguments first.
+		(newObject class = Apple) ifTrue: [ 
+			MyLoggerUtil log: 'OrderedCollection >> add: called from instrumentation' ] ]
+]
+
 { #category : #'instance creation' }
 InstrumentationUtils class >> implementorsOf: selector [
 

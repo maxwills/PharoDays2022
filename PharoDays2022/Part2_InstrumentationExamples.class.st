@@ -54,9 +54,10 @@ Part2_InstrumentationExamples class >> ex1_installLoggingMetalinkInCollectionAdd
 	<script>
 	| metalink |
 	metalink := MetaLink new.
-	metalink selector: #doLoggingOfAddedApples.
+	metalink selector: #doLoggingOfAddedApplesSimple.
 	metalink metaObject: InstrumentationUtils.
 	metalink control: #after.
+	
 	(OrderedCollection >> #add:) ast link: metalink
 ]
 
@@ -67,7 +68,12 @@ Part2_InstrumentationExamples class >> ex2_installLoggingMetalinkInEveryMethodAd
 	| implementorsOfAdd |
 	implementorsOfAdd := InstrumentationUtils implementorsOf: #add:.
 	implementorsOfAdd do: [ :cls | 
-		InstrumentationUtils installLoggingMetalinkInMethod: cls >> #add: ]
+		|metalink|
+		metalink := MetaLink new.
+		metalink selector: #doLoggingOfAddedApples.
+		metalink metaObject: self.
+		metalink control: #before.
+		(cls >> #add:) ast link: metalink ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -110,7 +116,13 @@ Part2_InstrumentationExamples class >> ex5_installLoggingAndMoreReflection [
 	<script>
 	| implementorsOfAdd |
 	implementorsOfAdd := InstrumentationUtils implementorsOf: #add:.
-	implementorsOfAdd do: [ :cls | InstrumentationUtils installExtendedLoggingMetalinkInMethod: cls >> #add: ]
+	implementorsOfAdd do: [ :cls | 
+		| metalink |
+		metalink := MetaLink new.
+		metalink selector: #doLoggingOfAddedApplesAndDay.
+		metalink metaObject: InstrumentationUtils.
+		metalink control: #before.
+		(cls >>#add:) ast link: metalink ]
 ]
 
 { #category : #'as yet unclassified' }
