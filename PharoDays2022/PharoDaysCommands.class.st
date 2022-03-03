@@ -57,6 +57,19 @@ PharoDaysCommands class >> menu00BrowsePart3Code: aBuilder [
 ]
 
 { #category : #menu }
+PharoDaysCommands class >> menu00BrowsePart4Code: aBuilder [
+
+	<worldMenu>
+	(aBuilder item: #PharoDaysBrowsePart4Item)
+		parent: #PharoDaysItem;
+		action: [ Part4_SeekerExamples  class browse ];
+		label: 'Browse Part 4 Code (Seeker)';
+		icon: (self iconNamed: 'nautilus');
+		help: 'Browses the code of Part 4 of the presentation';
+		order: 5
+]
+
+{ #category : #menu }
 PharoDaysCommands class >> menu00PharoDaysOn: aBuilder [
 
 	<worldMenu>

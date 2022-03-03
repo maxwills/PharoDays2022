@@ -89,3 +89,31 @@ Part4_SeekerExamples ex4_seekerQuery: seeker
 		   select: [ :state | state isMessageSend and: [ state node selector = #add: ] ]
 		   collect: [ :state | state methodAboutToExecute ]) asOrderedCollection
 ]
+
+{ #category : #'as yet unclassified' }
+Part4_SeekerExamples class >> ex5_seekerTTQ: seeker [
+
+"Transforming a Query to a TTQ.
+
+1. Use UserTTQ instead of Query class.
+2. Use Autotype for collected items.
+3. Include  the #bytecodeIndex key as in this example."
+
+	"In the scripting presenter, paste next line:
+	
+Part4_SeekerExamples ex5_seekerTTQ: seeker
+
+"
+
+	| autoResultType |
+	autoResultType := AutoType new.
+
+	(UserTTQ from: seeker newProgramStates
+		 select: [ :state | state isMessageSend and: [ state node selector = #add: ] ]
+		 collect: [ :state | 
+			 autoResultType newWith
+				 bytecodeIndex: state bytecodeIndex;
+				 methodClass: state methodAboutToExecute methodClass name;
+				 messageSelector: state methodAboutToExecute selector;
+				 endWith ]) showInSeeker
+]
