@@ -4,6 +4,13 @@ Class {
 	#category : #'PharoDays2022-GuidedExamples'
 }
 
+{ #category : #initialization }
+Part4_SeekerExamples class >> _clearLogger [
+
+	<script>
+	MyLoggerUtil clear
+]
+
 { #category : #'as yet unclassified' }
 Part4_SeekerExamples class >> _disableSeeker [
 
@@ -15,6 +22,7 @@ Part4_SeekerExamples class >> _disableSeeker [
 Part4_SeekerExamples class >> _enableSeeker [
 
 	<script>
+	SeekerInstallHelpers install.
 	SeekerConfig default seekerEnabled: true
 ]
 
@@ -28,9 +36,9 @@ Part4_SeekerExamples class >> _openPlaygroundWithAppleHunt [
 { #category : #'as yet unclassified' }
 Part4_SeekerExamples class >> ex1_seekerScriptingConditionalStop [
 
+"stops at the first #add: call"
 	| seeker currentState |
 	"Copy from here"
-	MyLoggerUtil clear.
 	seeker doAndUpdateSessionAfter: [ 
 		seeker restartAtBytecodeOne.
 		[ seeker canStep ] whileTrue: [ 
@@ -43,7 +51,6 @@ Part4_SeekerExamples class >> ex2_seekerScriptingLogging [
 
 	| seeker currentState |
 	"Copy from here"
-	MyLoggerUtil clear.
 seeker doAndUpdateSessionAfter: 
 [
 	seeker restartAtBytecodeOne.

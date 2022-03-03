@@ -30,6 +30,9 @@ InstrumentationUtils class >> doLoggingOfAddedApplesAndDay [
 	"Find the context of the add: method activation along with other conditions on the execution"
 
 	"Can only be used form inside the execution (via code insertion or instrumentation)"
+	
+	"In simple terms, this does:
+	if current method selector is #add: and it is called from a block in a method called doHuntingDay:, then log information about the hunter and day"
 
 	| addContext doHuntingDayBlockContext doHuntingDayMethodContext newObject hunter day |
 	addContext := MyReflectionUtils findContextWithSelector: #add: startingAt: thisContext.

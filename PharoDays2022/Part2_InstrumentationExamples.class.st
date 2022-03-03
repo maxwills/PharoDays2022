@@ -18,6 +18,31 @@ Part2_InstrumentationExamples class >> _openPlaygroundWithAppleHunt [
 	Part1_CodeInsertionExamples _openPlaygroundWithAppleHunt
 ]
 
+{ #category : #adding }
+Part2_InstrumentationExamples class >> _restoreOrderedCollectionAdd [
+
+	"Programmatically recompiles the original code of OrderedCollection>>add:"
+
+	"Click the script icon in the method list to restore the method OrderedCollection>>add:"
+
+	<script>
+	Part1_CodeInsertionExamples _restoreOrderedCollectionAdd
+]
+
+{ #category : #'as yet unclassified' }
+Part2_InstrumentationExamples class >> _uninstallAllLinks [
+
+	<script>
+	MetaLink uninstallAll
+]
+
+{ #category : #'as yet unclassified' }
+Part2_InstrumentationExamples class >> _uninstallAllMethodProxies [
+
+	<script>
+	MpMethodProxy allInstances copy do: [ :mp | mp uninstall ]
+]
+
 { #category : #'as yet unclassified' }
 Part2_InstrumentationExamples class >> ex1_installLoggingMetalinkInCollectionAdd [
 
@@ -98,29 +123,4 @@ Part2_InstrumentationExamples class >> installLoggingMetalinkInMethod: aCompiled
 	metalink metaObject: self.
 	metalink control: #before.
 	aCompiledMethod ast link: metalink
-]
-
-{ #category : #adding }
-Part2_InstrumentationExamples class >> restoreOrderedCollectionAdd [
-
-	"Programmatically recompiles the original code of OrderedCollection>>add:"
-
-	"Click the script icon in the method list to restore the method OrderedCollection>>add:"
-
-	<script>
-	Part1_CodeInsertionExamples restoreOrderedCollectionAdd
-]
-
-{ #category : #'as yet unclassified' }
-Part2_InstrumentationExamples class >> uninstallAllLinks [
-
-	<script>
-	MetaLink uninstallAll
-]
-
-{ #category : #'as yet unclassified' }
-Part2_InstrumentationExamples class >> uninstallAllMethodProxies [
-
-	<script>
-	MpMethodProxy allInstances copy do: [ :mp | mp uninstall ]
 ]
