@@ -8,6 +8,7 @@ Class {
 BaselineOfPharoDays2022 >> baseline: spec [
 
 	<baseline>
+	spec baseline: 'MethodProxies' with: [ spec repository: 'github://maxwills/MethodProxies/src' ].
 	spec for: #common do: [ spec package: 'PharoDays2022' ].
 	spec postLoadDoIt: #postload:package:
 ]
@@ -19,5 +20,5 @@ BaselineOfPharoDays2022 >> postload: loader package: packageSpec [
 		baseline: 'Seeker';
 		repository: 'github://maxwills/SeekerDebugger:main';
 		load.
-		(self class environment at: #SeekerInstallHelper) uninstall
+		(self class environment at: #SeekerInstallHelpers) uninstall
 ]
